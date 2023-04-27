@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Models\Type;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
@@ -72,7 +73,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        $types = Type::orderBy('name', 'asc')->get();
+
+
+        return view('projects.edit', compact('project', 'types'));
     }
 
     /**
