@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Technology;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             TypeSeeder::class,
+            TechnologySeeder::class,
             ProjectSeeder::class,
         ]);
     }

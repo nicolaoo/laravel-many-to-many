@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('type_technology', function (Blueprint $table) {
+        Schema::create('technologies', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100)->unique();
+            $table->string('slug', 100);
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_technology');
+        Schema::dropIfExists('technologies');
     }
 };
