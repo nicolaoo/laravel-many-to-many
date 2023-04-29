@@ -23,6 +23,7 @@
                 <th scope="col">title</th>
                 <th scope="col">Tipologia</th>
                 <th scope="col">contenuto</th>
+                <th scope="col">Technologie</th>
             </tr>
         </thead>
         <tbody>
@@ -42,6 +43,13 @@
                     </strong>
                 </td>
                 <td>{{ $project->content ? $project->content : 'NESSUN CONTENUTO'}}</td>
+                <td>
+                    @forelse($project->technology()->orderBy('name')->get() as $tech)
+                    <span class="badge rounded-pill text-bg-light">{{ $tech->name }} </span>
+                    @empty
+                    ciao
+                    @endforelse
+                </td>
                 <td><a class="btn btn-secondary" href="{{ route('projects.edit', $project) }}">Modifica</a></td>
             </tr>
             @endforeach
