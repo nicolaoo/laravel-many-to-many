@@ -30,6 +30,19 @@
     </div>
     <div>
         <h5>
+            TECHNOLOGIA:
+        </h5>
+        <strong>
+            <ul>
+                @foreach($project->technology()->get() as $tech)
+                <li>{{ $tech->name }}</li>
+                @endforeach
+            </ul>
+
+        </strong>
+    </div>
+    <div>
+        <h5>
             DESCRIPTION:
         </h5>
         <td>{{ $project->content}}</td>
