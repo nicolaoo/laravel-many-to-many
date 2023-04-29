@@ -9,7 +9,7 @@
 
         </div>
         <div class="col-auto">
-            <a class="btn btn-danger" href="{{ route('projects.index') }}">home</a>
+            <a class="btn btn-danger" href="{{ route('projects.index', $project) }}">home</a>
         </div>
 
     </div>
@@ -29,6 +29,33 @@
             </div>
             @enderror
         </div>
+
+        <div class="mb-3">
+            <label for="type" class="form-label">Titpologia</label>
+            <select name="type" class="form-control @error('title') is-invalid @enderror" id="type">
+                <option value="" selected>Seleziona Tipologia</option>
+                @foreach($types as $type)
+                <option @selected(old('type_id', $project->type_id) == $type->id) value="{{ $type->id }}">
+                    {{ $type->name }}
+                </option>
+                @endforeach
+            </select>
+            {{-- errore title --}}
+            @error('title')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        @foreach($technologies as $tech)
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="name-tech">
+            <label class="form-check-label" for="name-tech">
+                {{ $tech->name }}
+            </label>
+        </div>
+        @endforeach
 
         <div class="mb-3">
             <label for="content" class="form-label">Contenuto</label>

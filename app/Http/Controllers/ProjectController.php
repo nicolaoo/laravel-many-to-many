@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Technology;
 use Illuminate\Http\Request;
 use App\Models\Type;
 use Illuminate\Validation\Rule;
@@ -28,9 +29,12 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
-        return view('projects.create');
+        $types = Type::orderBy('name', 'asc')->get();
+        $technologies = Technology::orderBy('name', 'asc')->get();
+
+        return view('projects.create', compact('project', 'types', 'technologies'));
     }
 
     /**
