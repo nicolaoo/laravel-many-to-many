@@ -49,6 +49,15 @@
             @enderror
         </div>
 
+        @foreach($project->technology()->get() as $tech)
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                {{ $tech->name }}
+            </label>
+        </div>
+        @endforeach
+
         <div class="mb-3">
             <label for="content" class="form-label">Contenuto</label>
             <textarea cols="30" rows="10" name="content" class="form-control @error('content') is-invalid @enderror" id="content">

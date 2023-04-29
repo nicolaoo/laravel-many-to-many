@@ -38,7 +38,6 @@
                 <li>{{ $tech->name }}</li>
                 @endforeach
             </ul>
-
         </strong>
     </div>
     <div>
