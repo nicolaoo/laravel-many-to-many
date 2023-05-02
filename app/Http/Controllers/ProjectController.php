@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Http\Request;
 use App\Models\Type;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use App\Http\Requests\UpdateProjectRequest;
 
 
 class ProjectController extends Controller
@@ -43,13 +45,9 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|max:255|min:3',
-            'content' => 'nullable|string',
-            'slug' => 'required|max:255|min:3',
-        ]);
+        $data = $request->validated();
 
         $data['slug'] = Str::slug($data['title']);
 
@@ -66,7 +64,10 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('projects.show', compact('project'));
+        $types = Type::orderBy('name', 'asc')->get();
+        $technologies = Technology::orderBy('name', 'asc')->get();
+
+        return view('projects.show', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -78,9 +79,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::orderBy('name', 'asc')->get();
+        $technologies = Technology::orderBy('name', 'asc')->get();
 
-
-        return view('projects.edit', compact('project', 'types'));
+        return view('projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -90,13 +91,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        $data = $request->validate([
-            'title' => 'required|max:255|min:3',
-            'content' => 'nullable|string',
-            'slug' => 'required|max:255|min:3',
-        ]);
+        $data = $request->validated();
 
         $project->update($data);
 

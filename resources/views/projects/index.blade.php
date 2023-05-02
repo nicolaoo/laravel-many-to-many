@@ -39,7 +39,11 @@
                 </td>
                 <td>
                     <strong>
-                        {{ $project->type->name }}
+                        @forelse($project->type()->orderBy('name')->get() as $type)
+                        <span class="badge rounded-pill my-2 text-bg-light">{{ $type->name }} </span>
+                        @empty
+                        ---- TYPE -------
+                        @endforelse
                     </strong>
                 </td>
                 <td>{{ $project->content ? $project->content : 'NESSUN CONTENUTO'}}</td>
@@ -47,7 +51,7 @@
                     @forelse($project->technology()->orderBy('name')->get() as $tech)
                     <span class="badge rounded-pill my-2 text-bg-light">{{ $tech->name }} </span>
                     @empty
-                    ---- TECH ----
+                    ---- TECH -------
                     @endforelse
                 </td>
                 <td><a class="btn btn-secondary" href="{{ route('projects.edit', $project) }}">Modifica</a></td>

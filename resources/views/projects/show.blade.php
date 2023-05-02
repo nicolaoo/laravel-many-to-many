@@ -23,7 +23,11 @@
                 TIPOLOGIA:
             </h5>
             <strong>
-                {{ $project->type->name }}
+                @forelse($types as $type)
+                <li>{{ $type->name }}</li>
+                @empty
+                --- NESSUNA TYPE ---
+                @endforelse
             </strong>
 
         </td>
@@ -34,9 +38,12 @@
         </h5>
         <strong>
             <ul>
-                @foreach($project->technology()->get() as $tech)
+                @forelse($technologies as $tech)
+
                 <li>{{ $tech->name }}</li>
-                @endforeach
+                @empty
+                --- NESSUNA TECH ---
+                @endforelse
             </ul>
         </strong>
     </div>

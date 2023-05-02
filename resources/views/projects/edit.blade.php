@@ -49,10 +49,10 @@
             @enderror
         </div>
 
-        @foreach($project->technology()->get() as $tech)
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
+        @foreach($technologies as $key => $tech)
+        <div class="form-check ">
+            <input name="technologies" @checked( old('technologies', $tech->name)) class="form-check-input" type="checkbox" value="{{ $tech->id }}" id="tech">
+            <label class="form-check-label" for="tech">
                 {{ $tech->name }}
             </label>
         </div>
